@@ -4,7 +4,10 @@ const path = require("path");
 
 module.exports = {
     mode: "development",
-    entry: "src/index.js",
+    entry: {
+        index: path.resolve(__dirname, 'src/index.js'),
+        app: path.resolve(__dirname, 'src/app.js'),
+    },
 
     module: {
         rules: [
@@ -25,6 +28,12 @@ module.exports = {
         filename: "[name].bundle.js",
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            filename: "app.html",
+            template: "./assets/app.html",
+            chunks: ["app"],
+            scriptLoading: "defer",
+        }),
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: "./assets/index.html",
