@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "ikanago",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist",
+    "build": "yarn run tsc && yarn start",
+    "fmt": "prettier --write \"**/*.{ts,js,json}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.7"
+  }
+}
