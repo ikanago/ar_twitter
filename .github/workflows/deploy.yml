@@ -47,7 +47,8 @@ jobs:
       run: docker push $IMAGE_URL
     
     - name: Deploy the image
-      run: gcloud run deploy api \
+      run: |
+          gcloud run deploy api \
             --image $IMAGE_URL \
             --platform managed \
             --region $GCP_REGION \
@@ -63,10 +64,12 @@ jobs:
         node-version: '12.x'
 
     - name: Install dependencies
-      run: cd client && yarn install
+      run: yarn install
+      working-directory: client
 
     - name: Build pages
-      run: cd client && yarn build
+      run: yarn build
+      working-directory: client
 
     - name: Deploy to Netlify
       uses: netlify/actions/cli@master
@@ -74,4 +77,4 @@ jobs:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       with:
-        args: cd client && deploy --dir=dist --prod
+        args: deploy --dir=client/dist --prod
