@@ -1,0 +1,8 @@
+node_modules
+dist
+.gitignore
+.prettierignore
+.prettierrc.json
+Dockerfile
+yarn.lock
+package-lock.json
