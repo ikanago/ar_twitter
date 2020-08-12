@@ -6,8 +6,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node dist",
-    "build": "yarn run tsc && yarn start",
+    "start": "yarn build && node dist",
+    "build": "yarn run tsc",
     "fmt": "prettier --write \"**/*.{ts,js,json}\""
   },
   "devDependencies": {
