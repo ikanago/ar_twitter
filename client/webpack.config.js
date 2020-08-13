@@ -5,19 +5,16 @@ const path = require("path");
 module.exports = {
     mode: "development",
     entry: {
-        index: path.resolve(__dirname, 'src/index.js'),
-        app: path.resolve(__dirname, 'src/app.js'),
+        index: path.resolve(__dirname, "src/index.js"),
+        app: path.resolve(__dirname, "src/app.js"),
     },
 
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ]
-            }
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
         ],
     },
     resolve: {

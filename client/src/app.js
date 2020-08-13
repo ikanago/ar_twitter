@@ -1,6 +1,5 @@
 console.log("App");
 
-
 const url = "https://api.github.com/users/mralexgray/repos";
 fetch(url)
     .then(res => res.json())
@@ -20,11 +19,9 @@ fetch(url)
             const Text = document.createElement('div');
             Text.id = "Text";
 
-
             const name = document.createTextNode(data.tweets[i].user.name);
             const userid = document.createTextNode(data.tweets[i].user.screen_name);
             const text = document.createTextNode(data.tweets[i].text);
-
 
             Name.appendChild(name)
             Userid.appendChild(userid);
@@ -33,9 +30,5 @@ fetch(url)
             wholetweet.appendChild(Userid);
             wholetweet.appendChild(Text);
             Timeline.appendChild(wholetweet);
-
         }
-
-    });
-
-    
+});
