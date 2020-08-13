@@ -2,10 +2,13 @@ import Twitter from "twitter";
 
 type HomeTimeline = {
     tweets: Twitter.ResponseData;
-}
+};
 
-export const getHomeTimeline = async (client: Twitter, count: number): Promise<HomeTimeline> => {
-    const endpoint = 'statuses/home_timeline';
+export const getHomeTimeline = async (
+    client: Twitter,
+    count: number
+): Promise<HomeTimeline> => {
+    const endpoint = "statuses/home_timeline";
     const params = {
         count: count,
     };
@@ -14,5 +17,4 @@ export const getHomeTimeline = async (client: Twitter, count: number): Promise<H
         tweets: api_response,
     };
     return response;
-}
-
+};
