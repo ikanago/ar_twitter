@@ -26,7 +26,7 @@ app.get("/home_timeline", (req, res, _next) => {
         }
     }
 
-    getHomeTimeline(client, (req.query as any).name)
+    getHomeTimeline(client, count)
         .then(body => {
             res.json(body);
         })
