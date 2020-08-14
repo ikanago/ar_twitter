@@ -1,12 +1,12 @@
 console.log("App");
-
-const url = "https://api.github.com/users/mralexgray/repos";
+const inputTweet = 5; //APIから読み込むツイートの数
+const url = `https://api-5tvwyzuz5q-ue.a.run.app/home_timeline?count=${inputTweet}`;
 fetch(url)
     .then(res => res.json())
     .then(data => {
         const Timeline = document.getElementById("Timeline");
-        const TweetsCount = 5;
-        for (let i = 0; i < TweetsCount; i++) {
+        const tweetsCount = 5;
+        for (let i = 0; i < tweetsCount; i++) {
             console.log(data.tweets[i].text); //JSONを取得できているかコンソールで確認
             document.getElementById("honbun").innerHTML = data.tweets[i].text; // この行は確認用
 
