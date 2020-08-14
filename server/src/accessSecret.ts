@@ -1,5 +1,4 @@
-import pkg from "@google-cloud/secret-manager";
-const { SecretManagerServiceClient } = pkg;
+import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
 
 export const accessSecret = async () => {
     const client = new SecretManagerServiceClient();

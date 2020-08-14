@@ -26,10 +26,8 @@ export const getHomeTimeline = async (
 const clamp = (value: number, minimum: number, maximum: number): number => {
     if (value < minimum) {
         return minimum;
-    }
-    else if (value > maximum) {
+    } else if (value > maximum) {
         return maximum;
     }
     return value;
-}
-
+};

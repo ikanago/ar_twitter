@@ -1,7 +1,8 @@
 import express from "express";
 import Twitter from "twitter";
-import { getHomeTimeline } from "./accessTwitterAPI.js";
-import { accessSecret } from "./accessSecret.js";
+import { getHomeTimeline } from "./accessTwitterAPI";
+import { accessSecret } from "./accessSecret";
+import { ValidationError, validateHomeTimeline } from "./validateRequest";
 
 const main = async () => {
     const app = express();
@@ -13,30 +14,28 @@ const main = async () => {
         access_token_secret: secrets.ACCESS_TOKEN_SECRET,
     });
 
-    const port = 8080;
-    app.listen(port, () => {
-        console.log(`Server is listening to port ${port}`);
+    const router = express.Router();
+    router.get("/home_timeline", (req, res, _next) => {
+        const query = validateHomeTimeline(req);
+        if (query instanceof ValidationError) {
+            console.error(query.error);
+            res.status(422).json(query);
+        } else {
+            getHomeTimeline(client, query.count)
+                .then(body => {
+                    res.json(body);
+                })
+                .catch(err => {
+                    console.error(err);
+                    res.status(500);
+                });
+        }
     });
 
-    app.get("/home_timeline", (req, res, _next) => {
-        let count = NaN;
-        if (req.query && typeof req.query.count === "string") {
-            count = parseInt(req.query.count);
-            if (isNaN(count)) {
-                return res.status(422).json({
-                    error: "count must be integer",
-                });
-            }
-        }
-
-        getHomeTimeline(client, count)
-            .then(body => {
-                res.json(body);
-            })
-            .catch(err => {
-                console.error(err);
-                res.sendStatus(404);
-            });
+    const port = 8080;
+    app.use("/", router);
+    app.listen(port, () => {
+        console.log(`Server is listening to port ${port}`);
     });
 };
 
