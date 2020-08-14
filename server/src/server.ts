@@ -2,7 +2,8 @@ import { App } from "./app";
 
 const main = () => {
     const app = new App();
-    app.listen(8080);
+    const port = parseInt(process.env.PORT) || 8080;
+    app.listen(port);
 };
 
 main();
