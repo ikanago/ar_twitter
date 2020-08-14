@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import Twitter from "twitter";
 import { accessSecret } from "./accessSecret";
 import { handleHomeTimeline } from "./requestHandlers";
@@ -9,6 +10,7 @@ export class App {
 
     constructor() {
         this.app = express();
+        this.app.use(cors());
         accessSecret().then(secrets => {
             this.twitterClient = new Twitter({
                 consumer_key: secrets.CONSUMER_KEY,
