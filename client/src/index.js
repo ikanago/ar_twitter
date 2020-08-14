@@ -1,3 +1,5 @@
+import "../assets/index.css";
+
 const url = "https://api.github.com/users/mralexgray/repos";
 fetch(url)
     .then(res => res.json())

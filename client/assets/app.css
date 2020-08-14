@@ -1,3 +1,6 @@
+body{
+    background-color: blanchedalmond;
+}
 #wholetweet {
     width: 300px;
     position: relative;
@@ -6,4 +9,12 @@
     margin: 10px;
     padding: 5px;
     backdrop-filter: blur(3px); /* 背景をぼかした */
+}
+
+#iconimage{
+    border-radius: 50%;
+    float: left;
+}
+#Name{
+    font-size: large;
 }
