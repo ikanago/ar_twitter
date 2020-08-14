@@ -1,3 +1,5 @@
+import "../assets/style.css";
+
 console.log("App");
 const inputTweet = 5; //APIから読み込むツイートの数
 const url = `https://api-5tvwyzuz5q-ue.a.run.app/home_timeline?count=${inputTweet}`;
