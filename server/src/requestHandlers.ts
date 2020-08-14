@@ -3,6 +3,9 @@ import type Twitter from "twitter";
 import { getHomeTimeline } from "./accessTwitterAPI";
 import { ValidationError, validateHomeTimeline } from "./validateRequest";
 
+/**
+ * Handle request coming to '/home_timeline'.
+ */
 const handleHomeTimeline = (client: Twitter): express.RequestHandler => {
     return (request, response) => {
         const query = validateHomeTimeline(request);

@@ -11,6 +11,10 @@ class ValidationError {
     }
 }
 
+/*
+ * Validate URL encoded query in a request.
+ * If it is unable to parse correctly, returns error.
+ */
 const validateHomeTimeline = (
     request: express.Request
 ): HomeTimelineRequest | ValidationError => {
@@ -21,10 +25,9 @@ const validateHomeTimeline = (
     if (isNaN(count)) {
         return new ValidationError("Parameter 'count' must be integer");
     }
-    const parsed: HomeTimelineRequest = {
+    return {
         count: count,
     };
-    return parsed;
 };
 
 export { HomeTimelineRequest, ValidationError, validateHomeTimeline };
