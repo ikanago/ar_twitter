@@ -1,7 +1,10 @@
 import "../assets/style.css";
+//import "html2canvas";
+//import "aframe-html-shader"
 
 console.log("App");
-const inputTweet = 5; //APIから読み込むツイートの数
+/*
+const inputTweet = 1; //APIから読み込むツイートの数
 const url = `https://api-5tvwyzuz5q-ue.a.run.app/home_timeline?count=${inputTweet}`;
 fetch(url)
     .then(res => res.json())
@@ -35,4 +38,4 @@ fetch(url)
             wholetweet.appendChild(Text);
             Timeline.appendChild(wholetweet);
         }
-    });
+    });*/
