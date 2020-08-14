@@ -3,7 +3,6 @@ body {
 }
 #wholetweet {
     width: 300px;
-    height: 100px;
     position: relative;
     border: 2px solid black;
     border-radius: 10px; /*角を丸く*/
