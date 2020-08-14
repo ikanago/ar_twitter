@@ -1,4 +1,4 @@
-import Twitter from "twitter";
+import type Twitter from "twitter";
 
 type HomeTimeline = {
     tweets: Twitter.ResponseData;
