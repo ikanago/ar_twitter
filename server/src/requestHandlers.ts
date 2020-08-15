@@ -1,7 +1,6 @@
 import type * as express from "express";
 import oauth from "oauth";
 import { v4 as uuidv4 } from "uuid";
-import type { LoginCache } from "./app";
 import { ValidationError, validateHomeTimeline } from "./validateRequest";
 import {
     getOAuthAccessToken,
@@ -14,15 +13,15 @@ import {
  */
 const handleHomeTimeline = (
     oauthClient: oauth.OAuth,
-    loginCache: LoginCache
+    loginCache: Map<string, string>
 ): express.RequestHandler => {
     return (request, response) => {
         const id: string | undefined = request.cookies.id;
-        if (!id) {
+        if (!id || !loginCache.has(id)) {
             response.status(401).json({ error: "You are not autherized" });
             return;
         }
-        const token = loginCache[id];
+        const token = loginCache.get(id);
         const [oauthAccessToken, oauthAccessTokenSecret] = token.split(":");
         const query = validateHomeTimeline(request);
         if (query instanceof ValidationError) {
@@ -67,7 +66,7 @@ const handleAuthRequest = (
  */
 const handleAuthCallback = (
     oauthClient: oauth.OAuth,
-    loginCache: LoginCache
+    loginCache: Map<string, string>
 ): express.RequestHandler => {
     return async (request, response) => {
         const {
@@ -92,7 +91,7 @@ const handleAuthCallback = (
         );
         const id = uuidv4();
         const token = `${oauthAccessToken}:${oauthAccessTokenSecret}`;
-        loginCache[id] = token;
+        loginCache.set(id, token);
         response.cookie("id", id, { maxAge: 600000, httpOnly: true });
         response.redirect("https://ar-twitter.netlify.app/app.html");
     };
