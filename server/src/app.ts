@@ -1,29 +1,42 @@
 import express from "express";
+import session from "express-session";
 import cors from "cors";
-import Twitter from "twitter";
+import cookieParser from "cookie-parser";
+import oauth from "oauth";
 import { accessSecret } from "./accessSecret";
-import { handleHomeTimeline } from "./requestHandlers";
+import {
+    handleHomeTimeline,
+    handleAuthRequest,
+    handleAuthCallback,
+} from "./requestHandlers";
 
 export class App {
-    public app: express.Application;
-    private twitterClient: Twitter;
+    private app: express.Application;
+    private oauth: oauth.OAuth;
 
     constructor() {
         this.app = express();
         this.app.use(cors());
+        this.app.use(cookieParser());
+        this.app.use(session({ secret: "secret" }));
         accessSecret().then(secrets => {
-            this.twitterClient = new Twitter({
-                consumer_key: secrets.CONSUMER_KEY,
-                consumer_secret: secrets.CONSUMER_SECRET,
-                access_token_key: secrets.ACCESS_TOKEN_KEY,
-                access_token_secret: secrets.ACCESS_TOKEN_SECRET,
-            });
+            this.oauth = new oauth.OAuth(
+                "https://api.twitter.com/oauth/request_token",
+                "https://api.twitter.com/oauth/access_token",
+                secrets.CONSUMER_KEY,
+                secrets.CONSUMER_SECRET,
+                "1.0",
+                "https://api-5tvwyzuz5q-ue.a.run.app/auth/callback",
+                "HMAC-SHA1"
+            );
             this.initializeHandlers();
         });
     }
 
     private initializeHandlers = () => {
-        this.app.get("/home_timeline", handleHomeTimeline(this.twitterClient));
+        this.app.get("/home_timeline", handleHomeTimeline(this.oauth));
+        this.app.get("/auth/login", handleAuthRequest(this.oauth));
+        this.app.get("/auth/callback", handleAuthCallback(this.oauth));
     };
 
     public listen = (port: number) => {
