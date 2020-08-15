@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>AR Twitter</title>
-    </head>
-    <body>
-        <h1>Welcome to AR Twitter</h1>
 
-        <a href="https://api-5tvwyzuz5q-ue.a.run.app/auth/login">
-            <button type="button">Twitter認証する！</button>
-        </a>
-        <a href="app.html">App</a>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AR Twitter</title>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1>AR Twitter</h1>
+
+    <a href="https://api-5tvwyzuz5q-ue.a.run.app/auth/login" class="btn-twitter">
+        <i class="fab fa-twitter"></i> <span> 認証する！</span>
+    </a>
+
+    <h2>About</h2>
+    <a class="describe">AR
+        Twitterは名前の通り、ツイートをARマーカーを上に並べようというウェブアプリケーションです。スマートグラスのような体験を手軽にしたいと思い製作されました。上のボタンからTwitter認証して利用してください。</a>
+    <h2>Tech</h2>
+    <a class="describe">TwitterAPIから取得したツイート情報をDOM要素としてa-frameに読み込み、AR.jsから描画しています（予定）。</a>
+    <h2>Developers</h2>
+    <div class="devset">
+
+        <div class="profile">
+            <img src="https://avatars3.githubusercontent.com/u/28985004?s=460&u=64e7f60557fb929abf2fa814872ae5df578d8742&v=4"
+                class="icon">
+            <a class="username">ikanago</a>
+        </div>
+
+        <div class="profile">
+            <img src="https://avatars3.githubusercontent.com/u/65773343?s=400&u=743909112cc1a921ed7f439ff2baa16619ab5101&v=4"
+                class="icon">
+            <a class="username">きふ</a>
+        </div>
+
+        <div class="profile">
+            <img src="https://avatars2.githubusercontent.com/u/60186690?s=460&v=4" class="icon">
+            <a class="username">2tx</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- <a href="app.html">App</a> -->
+</body>
+
 </html>
