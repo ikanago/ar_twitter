@@ -40,6 +40,9 @@ const handleHomeTimeline = (
     };
 };
 
+/**
+ * Obtain request tokens. Redirect user to Twitter's authentication page.
+ */
 const handleAuthRequest = (
     oauthClient: oauth.OAuth
 ): express.RequestHandler => {
@@ -50,7 +53,6 @@ const handleAuthRequest = (
             results,
         } = await getOAuthRequestToken(oauthClient);
         console.log(oauthToken, oauthTokenSecret);
-        console.log(request.session);
         request.session.oauth_token = oauthToken;
         request.session.oauth_token_secret = oauthTokenSecret;
         response.redirect(
@@ -59,6 +61,9 @@ const handleAuthRequest = (
     };
 };
 
+/**
+ * Handle callback from Twitter API.
+ */
 const handleAuthCallback = (
     oauthClient: oauth.OAuth
 ): express.RequestHandler => {
