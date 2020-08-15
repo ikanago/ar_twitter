@@ -1,0 +1,27 @@
+body{
+    background-image: url(https://i.pinimg.com/564x/d7/72/d3/d772d3398b0d065e69f45cb5939a8090.jpg);
+}
+#wholetweet {
+    width: 300px;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 10px; /*角を丸く*/
+    margin: 10px;
+    padding: 5px;
+    backdrop-filter: blur(3px); /* 背景をぼかした */
+}
+
+#iconimage{
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
+}
+#Name{
+    font-size: large;
+    font-family: 'Kosugi Maru', sans-serif;
+}
+
+#Text{
+    padding: 10px;
+    
+}
