@@ -18,6 +18,7 @@ const handleHomeTimeline = (
             oauth_access_token: oauthAccessToken,
             oauth_access_token_secret: oauthAccessTokenSecret,
         } = request.session;
+        console.log(`in handleHomeTimeline, Access Token: ${oauthAccessToken}, Access Token Secret: ${oauthAccessTokenSecret}`);
         if (!oauthAccessToken || !oauthAccessTokenSecret) {
             response.status(401).json({ error: "You are not autherized" });
             return;
@@ -61,11 +62,12 @@ const handleAuthRequest = (
 const handleAuthCallback = (
     oauthClient: oauth.OAuth
 ): express.RequestHandler => {
-    return async (request, response, next) => {
+    return async (request, response) => {
         const {
             oauth_token: oauthToken,
             oauth_token_secret: oauthTokenSecret,
         } = request.session;
+        console.log(oauthToken, oauthTokenSecret);
         const { oauth_verifier: oauthVerifier } = request.query;
         if (typeof oauthVerifier !== "string") {
             response.status(500);
@@ -83,7 +85,7 @@ const handleAuthCallback = (
         );
         request.session.oauth_access_token = oauthAccessToken;
         request.session.oauth_access_token_secret = oauthAccessTokenSecret;
-        request.session.save(() => response.redirect("https://ar-twitter.netlify.app/app.html"));
+        response.redirect("https://ar-twitter.netlify.app/app.html");
     };
 };
 
