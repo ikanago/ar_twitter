@@ -3,14 +3,14 @@ import "../assets/app.css";
 console.log("App");
 const inputTweet = 5; //APIから読み込むツイートの数
 const url = `https://api-5tvwyzuz5q-ue.a.run.app/home_timeline?count=${inputTweet}`;
+const Timeline = document.getElementById("Timeline");
+
 fetch(url)
     .then(res => res.json())
     .then(data => {
-        const Timeline = document.getElementById("Timeline");
         const tweetsCount = 5;
         for (let i = 0; i < tweetsCount; i++) {
             console.log(data.tweets[i].text); //JSONを取得できているかコンソールで確認
-
             const wholetweet = document.createElement("div"); //大枠
                 wholetweet.id = "wholetweet";
             const Name = document.createElement("div");
@@ -42,4 +42,10 @@ fetch(url)
             wholetweet.appendChild(Text);
             Timeline.appendChild(wholetweet);
         }
+    })
+    .catch(error => {
+        const errorMessage = document.createElement("div");
+        errorMessage.id = "errorMessage";
+        errorMessage.innerHTML = "読み込みに失敗しました...";
+        Timeline.appendChild(errorMessage);
     });
