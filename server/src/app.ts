@@ -10,9 +10,14 @@ import {
     handleAuthCallback,
 } from "./requestHandlers";
 
+export type LoginCache = {
+    [id: string]: string;
+};
+
 export class App {
     private app: express.Application;
     private oauth: oauth.OAuth;
+    private loginCache: LoginCache;
 
     constructor() {
         this.app = express();
@@ -34,9 +39,15 @@ export class App {
     }
 
     private initializeHandlers = () => {
-        this.app.get("/home_timeline", handleHomeTimeline(this.oauth));
+        this.app.get(
+            "/home_timeline",
+            handleHomeTimeline(this.oauth, this.loginCache)
+        );
         this.app.get("/auth/login", handleAuthRequest(this.oauth));
-        this.app.get("/auth/callback", handleAuthCallback(this.oauth));
+        this.app.get(
+            "/auth/callback",
+            handleAuthCallback(this.oauth, this.loginCache)
+        );
     };
 
     public listen = (port: number) => {
