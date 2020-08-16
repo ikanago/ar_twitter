@@ -1,0 +1,69 @@
+body{
+    background-color: white;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1 {
+    color: #364e96;/*文字色*/
+    padding: 0.5em 0;/*上下の余白*/
+    border-top: solid 3px #364e96;/*上線*/
+    border-bottom: solid 3px #364e96;/*下線*/
+    text-align: center;
+  }
+h2{
+    text-align: center;
+    color: #364e96;
+    margin-bottom: 3px;
+}
+.describe{
+    padding: 10px;
+}
+.btn-twitter {
+    color: #FFF;
+    border-radius: 7px;
+    display: block;
+    height: 50px;
+    width: 190px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 50px;
+    background: #1da1f3;
+    overflow: hidden;
+    text-decoration:none;
+    margin: 0 auto;
+  }
+  
+  .btn-twitter .fa-twitter {
+    text-shadow: 2px 2px 0px #4287d6;
+    font-size: 30px;
+  }
+  .btn-twitter:hover {
+    color:#88daff;
+    transition: .5s;
+  }
+.devset{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+.icon{
+    border-radius: 50%;
+    display: inline-block;
+	width: 100%;
+	max-width: 80px;  
+	height: auto;
+	-webkit-filter: drop-shadow(0px 0px 5px rgba(0,0,0,.3));  
+	-moz-filter:drop-shadow(0px 0px 5px rgba(0,0,0,.3));
+	-ms-filter:drop-shadow(0px 0px 5px rgba(0,0,0,.3));
+	filter:drop-shadow(0px 0px 5px rgba(0,0,0,.3));
+}
+
+.username{
+    display: contents;
+}
+
+.profile{
+    display: inline-block;
+    text-align: center;
+}

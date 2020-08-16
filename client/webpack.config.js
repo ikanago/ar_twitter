@@ -45,6 +45,6 @@ module.exports = {
         inline: true,
         hot: true,
         port: 5000,
-        open: true,
+        open: false,
     },
 };

@@ -12,4 +12,3 @@ COPY src/ /app/src/
 RUN yarn build
 
 CMD ["node", "dist/server.js"]
-
