@@ -13,12 +13,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 
-    <div id="Timeline"></div>
+    <div id="Timeline">
+        <h1> AR Twitter</h1>
+    </div>
 
     <!-- AR コンテンツの定義。 -->
     <a-scene embedded arjs="debugUIEnabled:false" vr-mode-ui="enabled:false">
         <a-assets>
-            <canvas id="tl-canvas" crossorigin="anonymous"></canvas>
+            <canvas id="tl-canvas" crossorigin="anonymous" width="400px" height="1000px"></canvas>
         </a-assets>
         <a-marker preset="hiro">
             <a-entity geometry="primitive: plane; height: 5; width: 2;" material="src: #tl-canvas" draw-canvas="tl-canvas" position="0 0 0"></a-entity>
