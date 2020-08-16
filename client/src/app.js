@@ -47,5 +47,9 @@ fetch(url)
                 .getContext("2d")
                 .getImageData(0, 0, canvas.width, canvas.height);
             tl_canvas.getContext("2d").putImageData(image, 0, 0);
-        });
+        })
+    .then(() => {
+        Timeline.style.display = "none";
+    } 
+    );
     });
