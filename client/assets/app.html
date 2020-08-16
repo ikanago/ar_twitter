@@ -13,11 +13,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 
+    <div id="TImeline">
+
+    </div>
+
     <!-- テクスチャの中身を描画する要素。 -->
     <div id="target" style="z-index: -15;">
         <!-- <img src="./thinking_face.png" /> -->
         <h1>ARRRRRRRRRRRRRRRRRRRRRRRRRRRR</h1>
     </div>
+
+    <a-assets>
+        <canvas id="tl-canvas" crossorigin="anonymous"></canvas>
+    </a-assets>
 
     <!-- AR コンテンツの定義。 -->
     <a-scene embedded arjs="debugUIEnabled:false" vr-mode-ui="enabled:false">
@@ -25,8 +33,7 @@
             <a-plane position="0.5 0.5 0.51" rotation="-45 0 0" width="1" height="1"
                 material="shader:html;target:#target;fps:24;width:640;height:640"></a-plane>
             <a-plane position="0 0 0.51" rotation="-45 0 0" width="1" height="1" color="#FF0000"></a-plane>
-        </a-marker>
-
+            <a-entity position="0 0 0.51" rotation="-45 0 0" width="1" height="1" color="#FF0000"></a-entity>       </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 
