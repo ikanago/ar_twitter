@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 // import "aframe-html-shader";
 
 console.log("App");
-const inputTweet = 3; //APIから読み込むツイートの数
+const inputTweet = 5; //APIから読み込むツイートの数
 const url = `https://api-5tvwyzuz5q-ue.a.run.app/home_timeline?count=${inputTweet}`;
 const url_demo = ""
 fetch(url)
