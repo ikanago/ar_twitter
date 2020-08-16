@@ -10,20 +10,17 @@ import {
     handleAuthCallback,
 } from "./requestHandlers";
 
-export type LoginCache = {
-    [id: string]: string;
-};
-
 export class App {
     private app: express.Application;
     private oauth: oauth.OAuth;
-    private loginCache: LoginCache;
+    private loginCache: Map<string, string>;
 
     constructor() {
         this.app = express();
         this.app.use(cors());
         this.app.use(cookieParser());
         this.app.use(session({ secret: "secret" }));
+        this.loginCache = new Map();
         accessSecret().then(secrets => {
             this.oauth = new oauth.OAuth(
                 "https://api.twitter.com/oauth/request_token",
