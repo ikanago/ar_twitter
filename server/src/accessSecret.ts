@@ -8,6 +8,6 @@ export const accessSecret = async () => {
     const [version] = await client.accessSecretVersion({
         name: name,
     });
-    const payload = version.payload.data.toString();
-    return JSON.parse(payload);
+    const data = version.payload.data.toString();
+    return JSON.parse(data);
 };
