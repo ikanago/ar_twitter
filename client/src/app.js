@@ -5,10 +5,10 @@ import html2canvas from "html2canvas";
 console.log("App");
 const inputTweet = 5; //APIから読み込むツイートの数
 const url = `https://api-5tvwyzuz5q-ue.a.run.app/home_timeline?count=${inputTweet}`;
-const url_demo = ""
+const url_demo = "";
 fetch(url)
     .then(res => res.json())
-    .then((data) => {
+    .then(data => {
         const Timeline = document.getElementById("Timeline");
         const tweetsCount = 5;
         for (let i = 0; i < tweetsCount; i++) {
@@ -40,12 +40,12 @@ fetch(url)
         }
     })
     .then(() => {
-        html2canvas(Timeline).then((canvas) => {
+        html2canvas(Timeline).then(canvas => {
             var tl_canvas = document.getElementById("tl-canvas");
-            console.log(canvas.width,"eeee")
-            var image = canvas.getContext("2d").getImageData(0,0,canvas.width,canvas.height);
+            console.log(canvas.width, "eeee");
+            var image = canvas
+                .getContext("2d")
+                .getImageData(0, 0, canvas.width, canvas.height);
             tl_canvas.getContext("2d").putImageData(image, 0, 0);
-        })
-    }
-        
-    );
+        });
+    });
