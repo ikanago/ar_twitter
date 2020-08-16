@@ -1,5 +1,7 @@
 import type * as express from "express";
 import oauth from "oauth";
+import { v4 as uuidv4 } from "uuid";
+import type { LoginCache } from "./app";
 import { ValidationError, validateHomeTimeline } from "./validateRequest";
 import {
     getOAuthAccessToken,
@@ -11,18 +13,17 @@ import {
  * Handle request coming to '/home_timeline'.
  */
 const handleHomeTimeline = (
-    oauthClient: oauth.OAuth
+    oauthClient: oauth.OAuth,
+    loginCache: LoginCache
 ): express.RequestHandler => {
     return (request, response) => {
-        const {
-            oauth_access_token: oauthAccessToken,
-            oauth_access_token_secret: oauthAccessTokenSecret,
-        } = request.session;
-        console.log(`in handleHomeTimeline, Access Token: ${oauthAccessToken}, Access Token Secret: ${oauthAccessTokenSecret}`);
-        if (!oauthAccessToken || !oauthAccessTokenSecret) {
+        const id: string | undefined = request.cookies.id;
+        if (!id) {
             response.status(401).json({ error: "You are not autherized" });
             return;
         }
+        const token = loginCache[id];
+        const [oauthAccessToken, oauthAccessTokenSecret] = token.split(":");
         const query = validateHomeTimeline(request);
         if (query instanceof ValidationError) {
             response.status(422).json(query);
@@ -40,6 +41,9 @@ const handleHomeTimeline = (
     };
 };
 
+/**
+ * Obtain request tokens. Redirect user to Twitter's authentication page.
+ */
 const handleAuthRequest = (
     oauthClient: oauth.OAuth
 ): express.RequestHandler => {
@@ -50,7 +54,6 @@ const handleAuthRequest = (
             results,
         } = await getOAuthRequestToken(oauthClient);
         console.log(oauthToken, oauthTokenSecret);
-        console.log(request.session);
         request.session.oauth_token = oauthToken;
         request.session.oauth_token_secret = oauthTokenSecret;
         response.redirect(
@@ -59,8 +62,12 @@ const handleAuthRequest = (
     };
 };
 
+/**
+ * Handle callback from Twitter API.
+ */
 const handleAuthCallback = (
-    oauthClient: oauth.OAuth
+    oauthClient: oauth.OAuth,
+    loginCache: LoginCache
 ): express.RequestHandler => {
     return async (request, response) => {
         const {
@@ -83,8 +90,10 @@ const handleAuthCallback = (
             oauthTokenSecret,
             oauthVerifier
         );
-        request.session.oauth_access_token = oauthAccessToken;
-        request.session.oauth_access_token_secret = oauthAccessTokenSecret;
+        const id = uuidv4();
+        const token = `${oauthAccessToken}:${oauthAccessTokenSecret}`;
+        loginCache[id] = token;
+        response.cookie("id", id, { maxAge: 600000, httpOnly: true });
         response.redirect("https://ar-twitter.netlify.app/app.html");
     };
 };

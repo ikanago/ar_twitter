@@ -12,6 +12,13 @@ type AccessTokens = {
     results: any;
 };
 
+/**
+ * Get timeline of the user authenticate with given Access Token.
+ * @param oauthClient
+ * @param oauthAccessToken
+ * @param oauthAccessTokenSecret
+ * @param count How many tweets to get
+ */
 const getHomeTimeline = (
     oauthClient: oauth.OAuth,
     oauthAccessToken: string,
