@@ -92,7 +92,11 @@ const handleAuthCallback = (
         const id = uuidv4();
         const token = `${oauthAccessToken}:${oauthAccessTokenSecret}`;
         loginCache.set(id, token);
-        response.cookie("id", id, { maxAge: 600000, httpOnly: true, path: "/"});
+        response.cookie("id", id, {
+            maxAge: 6000000,
+            httpOnly: true,
+            path: "/",
+        });
         response.redirect("https://ar-twitter.netlify.app/app.html");
     };
 };
