@@ -40,7 +40,7 @@ fetch(url)
         }
     })
     .then(() => {
-        html2canvas(Timeline).then(canvas => {
+        html2canvas(Timeline, {width: 1200, height: 3000}).then(canvas => {
             var tl_canvas = document.getElementById("tl-canvas");
             console.log(canvas.width, "eeee");
             var image = canvas
