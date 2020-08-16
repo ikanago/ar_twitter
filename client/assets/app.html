@@ -16,7 +16,7 @@
     <div id="Timeline"></div>
 
     <!-- テクスチャの中身を描画する要素。 -->
-    <div id="target" style="z-index: -15;">
+    <div id="target" style="z-index: -50;">
         <!-- <img src="./thinking_face.png" /> -->
         <h1>ARRRRRRRRRRRRRRRRRRRRRRRRRRRR</h1>
     </div>
@@ -28,7 +28,7 @@
             <canvas id="tl-canvas" crossorigin="anonymous"></canvas>
         </a-assets>
         <a-marker preset="hiro">
-            <a-entity geometry="primitive: plane" material="src: #tl-canvas" draw-canvas="tl-canvas" ></a-entity>
+            <a-entity geometry="primitive: plane" material="src: #tl-canvas" draw-canvas="tl-canvas" position="0 -1 -10"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
